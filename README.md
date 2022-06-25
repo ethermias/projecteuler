@@ -34,3 +34,21 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 ```
 ### Answer 3
+
+```
+isDiv :: Integer -> Integer -> Integer
+isDiv y n
+    | y `mod` n == 0 =  0
+    | otherwise = n
+
+next x y = last $ takeWhile (\z ->  z /= 0 ) $ map f [x..y] where f = isDiv y
+
+prime :: Integer -> Integer
+prime y = 1 + (next 2 y) 
+
+isPrime :: Integer -> Integer
+isPrime result
+        | mm  > 1 = isPrime mm 
+        | otherwise  = result
+        where mm = result `div` (prime result)
+```
