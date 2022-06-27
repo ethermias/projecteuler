@@ -42,16 +42,16 @@ isDiv y n
     | y `mod` n == 0 =  0
     | otherwise = n
 
-next x y = last $ takeWhile (\z ->  z /= 0 ) $ map f [x..y] where f = isDiv y
+step0 x y = last $ takeWhile (\z ->  z /= 0 ) $ map f [x..y] where f = isDiv y
 
-prime :: Integer -> Integer
-prime y = 1 + (next 2 y) 
+step1 :: Integer -> Integer
+step1 y = 1 + (step0 2 y) 
 
-isPrime :: Integer -> Integer
-isPrime result
-        | mm  > 1 = isPrime mm 
-        | otherwise  = result
-        where mm = result `div` (prime result)
+result :: Integer -> Integer
+result x
+      | mm  > 1 = result mm 
+      | otherwise  = x
+      where mm = x `div` (step1 x)
 ```
 
 ## Problem 4
@@ -79,3 +79,15 @@ min2 m = concat (map next [m, m-1..1])
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 ```
 ### Answer 5
+import Data.List
+prime_factors n =
+  case factors of
+    [] -> [n]
+    _  -> factors ++ prime_factors (n `div` (head factors))
+  where factors = take 1 $ filter (\x -> (n `mod` x) == 0) [2 .. n-1]
+
+all0 = map prime_factors [2..20]
+all1 xs ys = intersect xs ys
+all2 xs ys  = ys \\ (all1 xs ys)
+all3 = foldl (\x acc -> (all2 acc x) ++ acc) [] all0
+result = foldl (\x acc -> x * acc ) 1 all3
