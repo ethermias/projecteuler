@@ -93,3 +93,20 @@ all2 xs ys  = ys \\ (all1 xs ys)
 all3 = foldl (\x acc -> (all2 acc x) ++ acc) [] all0
 result = foldl (\x acc -> x * acc ) 1 all3
 ```
+## Problem 6
+```
+
+Problem 6
+The sum of the squares of the first ten natural numbers is,
+
+The square of the sum of the first ten natural numbers is,
+
+Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is .
+
+Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+```
+### Answer 6
+```
+step0 z = foldl (\x acc ->  ( acc + fst x, (acc ^ 2) + snd x)) (0,0) [1..z]
+step1 z = ( (fst f) ^ 2)  - snd f  where f  = step0 z 
+```
