@@ -119,4 +119,6 @@ What is the 10 001st prime number?
 ```
 ### Answer 7
 ```
+result n = last $ take n $ sieve [2..]
+sieve (p : xs) = p : sieve [ x | x <- xs, x `mod` p > 0 ]
 ```
