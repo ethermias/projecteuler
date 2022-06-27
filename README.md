@@ -79,6 +79,7 @@ min2 m = concat (map next [m, m-1..1])
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 ```
 ### Answer 5
+```
 import Data.List
 prime_factors n =
   case factors of
@@ -91,3 +92,4 @@ all1 xs ys = intersect xs ys
 all2 xs ys  = ys \\ (all1 xs ys)
 all3 = foldl (\x acc -> (all2 acc x) ++ acc) [] all0
 result = foldl (\x acc -> x * acc ) 1 all3
+```
