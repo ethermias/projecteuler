@@ -33,6 +33,7 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 
 What is the largest prime factor of the number 600851475143 ?
 ```
+
 ### Answer 3
 
 ```
@@ -52,3 +53,29 @@ isPrime result
         | otherwise  = result
         where mm = result `div` (prime result)
 ```
+
+## Problem 4
+```
+A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two 3-digit numbers.
+```
+### Answer 4
+
+```
+maxNum :: Ord a => [a] -> a
+maxNum [x] = x
+maxNum (x:x':xs) = maxNum ((if x >= x' then x else x'):xs)
+
+reverseInt = read . reverse . show
+next n  = take 1 $ dropWhile (\z ->  z /= reverseInt z ) $ map (*n) [n, n-1..1]
+min2 m = concat (map next [m, m-1..1])
+```
+
+## Problem 5
+```
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+```
+### Answer 5
