@@ -111,7 +111,7 @@ step0 z = foldl (\x acc ->  ( acc + fst x, (acc ^ 2) + snd x)) (0,0) [1..z]
 step1 z = ( (fst f) ^ 2)  - snd f  where f  = step0 z 
 ```
 
-## Problem 7
+### Problem 7
 ```
 By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
 
@@ -121,4 +121,19 @@ What is the 10 001st prime number?
 ```
 result n = last $ take n $ sieve [2..]
 sieve (p : xs) = p : sieve [ x | x <- xs, x `mod` p > 0 ]
+```
+
+### Problem 9
+```
+A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+
+a2 + b2 = c2
+For example, 32 + 42 = 9 + 16 = 25 = 52.
+
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.
+```
+### Answer 9
+```
+result n = take 1 $ [ a* b * c | c <- [1..(n `div` 2) ], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a+b+c == n]
 ```
