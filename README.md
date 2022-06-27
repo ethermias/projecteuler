@@ -110,3 +110,13 @@ Find the difference between the sum of the squares of the first one hundred natu
 step0 z = foldl (\x acc ->  ( acc + fst x, (acc ^ 2) + snd x)) (0,0) [1..z]
 step1 z = ( (fst f) ^ 2)  - snd f  where f  = step0 z 
 ```
+
+## Problem 7
+```
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+```
+### Answer 7
+```
+```
