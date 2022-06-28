@@ -172,3 +172,24 @@ Find the product abc.
 ```
 result n = take 1 $ [ a* b * c | c <- [1..(n `div` 2) ], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a+b+c == n]
 ```
+### Problem 10
+```
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+```
+### Answer 10
+```
+-- really slow implementation ..
+import Data.List
+import qualified Data.Map as M
+primes :: [Integer]
+primes = mkPrimes 2 M.empty
+  where
+    mkPrimes n m = case (M.null m, M.findMin m) of
+        (False, (n', skips)) | n == n' ->
+            mkPrimes (succ n) (addSkips n (M.deleteMin m) skips)
+        _ -> n : mkPrimes (succ n) (addSkip n m n)
+    addSkip n m s = M.alter (Just . maybe [s] (s:)) (n+s) m
+    addSkips = foldl' . addSkip
+```
